@@ -13,6 +13,7 @@
 @interface NotificationViewController () <UNNotificationContentExtension>
 
 @property IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UIImageView *myImageView;
 
 @end
 
@@ -20,10 +21,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.myImageView.layer.masksToBounds = YES;
     // Do any required interface initialization here.
 }
 
 - (void)didReceiveNotification:(UNNotification *)notification {
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    NSLog(@"%@",userInfo);
+    NSData * data = [userInfo objectForKey:@"image"];
+    self.myImageView.image = [UIImage imageWithData:data];
     self.label.text = notification.request.content.body;
 }
 
