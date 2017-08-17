@@ -91,7 +91,7 @@
 #warning  这里需要注意当推送带有图片、视频、声音时，必须要在"aps"这个字典下增加     "mutable-content": 1,这个字段，否则不会显示图片、声音、视频；至于多媒体的字段你也可以与后台商量一下如何制定；
     
 #pragma mark====================添加=categoryIdentifier============
-    self.bestAttemptContent.categoryIdentifier = @"categoryNoOperationAction";
+    self.bestAttemptContent.categoryIdentifier = @"categoryNoOperationAction";//myNotificationCategory categoryNoOperationAction
     // Modify the notification content here...
     //    self.bestAttemptContent.title = [NSString stringWithFormat:@"点击查看更多内容"];
     
