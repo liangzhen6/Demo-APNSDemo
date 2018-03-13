@@ -7,7 +7,7 @@
 //
 
 #import "NotificationService.h"
-
+#import <AVFoundation/AVFoundation.h>
 @interface NotificationService ()
 
 @property (nonatomic, strong) void (^contentHandler)(UNNotificationContent *contentToDeliver);
@@ -103,14 +103,12 @@
     if (!mediaUrl.length) {
         self.contentHandler(self.bestAttemptContent);
     }
-    
     [self loadAttachmentForUrlString:mediaUrl withType:dict[@"media"][@"type"] completionHandle:^(UNNotificationAttachment *attach) {
         
         if (attach) {
             self.bestAttemptContent.attachments = [NSArray arrayWithObject:attach];
         }
         self.contentHandler(self.bestAttemptContent);
-        
     }];
 
     
@@ -166,6 +164,18 @@
         ext = @"mp3";
     }
     return [@"." stringByAppendingString:ext];
+}
+//合成收款语音播报  例如 收款到账  外卖订单处理等
+- (void)syntheticVoice:(NSString *)string {
+    // 语音合成
+    AVSpeechSynthesizer * synthesizer = [[AVSpeechSynthesizer alloc] init];
+    AVSpeechUtterance *speechUtterance = [AVSpeechUtterance speechUtteranceWithString:string];
+    //设置语言类别（不能被识别，返回值为nil）
+    speechUtterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"zh-CN"];//汉语
+    //设置语速快慢
+    speechUtterance.rate = 0.55;
+    //语音合成器会生成音频
+    [synthesizer speakUtterance:speechUtterance];
 }
 
 
