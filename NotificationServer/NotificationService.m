@@ -97,7 +97,7 @@
     self.bestAttemptContent.categoryIdentifier = @"categoryNoOperationAction";//myNotificationCategory categoryNoOperationAction
     // Modify the notification content here...
     //    self.bestAttemptContent.title = [NSString stringWithFormat:@"点击查看更多内容"];
-    
+//    self.bestAttemptContent.sound = nil;//禁止播放声音
     
     NSDictionary *dict =  self.bestAttemptContent.userInfo;
     //    NSDictionary *notiDict = dict[@"aps"];
